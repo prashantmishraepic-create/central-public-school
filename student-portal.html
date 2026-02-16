@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Central Public School</title>
+    <link rel="stylesheet" href="portal-styles.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="school-emblem">
+                    <div class="emblem-circle">CPS</div>
+                </div>
+                <h1>Student Portal</h1>
+                <p>Central Public School, Azamgarh</p>
+            </div>
+            
+            <form class="login-form" onsubmit="studentLogin(event)">
+                <div class="form-group">
+                    <label>Student ID / Roll Number</label>
+                    <input type="text" id="studentId" placeholder="Enter your Student ID" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="studentPassword" placeholder="Enter your password" required>
+                </div>
+                
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">Sign In</button>
+                
+                <div class="login-footer">
+                    <p>Having trouble logging in? Contact: <strong>support@centralpublicschool.edu.in</strong></p>
+                    <a href="index.html" class="back-link">← Back to Website</a>
+                </div>
+            </form>
+        </div>
+        
+        <div class="login-info">
+            <div class="info-content">
+                <h2>Welcome to Your Learning Hub</h2>
+                <ul class="features-list">
+                    <li><span class="feature-icon">📊</span> View Attendance & Performance</li>
+                    <li><span class="feature-icon">📝</span> Access Assignments & Tests</li>
+                    <li><span class="feature-icon">📚</span> Download Study Materials</li>
+                    <li><span class="feature-icon">💰</span> Check Fee Status</li>
+                    <li><span class="feature-icon">📢</span> Stay Updated with Notices</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Dashboard -->
+    <div id="studentDashboard" class="dashboard-container" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-mini">CPS</div>
+                <div class="logo-text">
+                    <h3>Student Portal</h3>
+                    <p>Central Public School</p>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" onclick="showSection('overview')">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('profile')">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">My Profile</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('attendance')">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Attendance</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('fees')">
+                    <span class="nav-icon">💰</span>
+                    <span class="nav-text">Fee Status</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('results')">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Results</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('assignments')">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">Assignments</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('materials')">
+                    <span class="nav-icon">📚</span>
+                    <span class="nav-text">Study Materials</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('timetable')">
+                    <span class="nav-icon">🕐</span>
+                    <span class="nav-text">Timetable</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('tests')">
+                    <span class="nav-icon">✏️</span>
+                    <span class="nav-text">Online Tests</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('notices')">
+                    <span class="nav-icon">📢</span>
+                    <span class="nav-text">Notices</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('idcard')">
+                    <span class="nav-icon">🎫</span>
+                    <span class="nav-text">ID Card</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+                <div class="topbar-search">
+                    <input type="text" placeholder="Search anything...">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div class="topbar-actions">
+                    <div class="notification-icon">
+                        <span>🔔</span>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <div class="profile-avatar">AK</div>
+                        <div class="profile-info">
+                            <span class="profile-name">Aarav Kumar</span>
+                            <span class="profile-class">Class X-A</span>
+                        </div>
+                        <button class="logout-btn" onclick="logout()">Logout</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="content-area">
+                <!-- Overview Section -->
+                <section id="overview" class="content-section active">
+                    <div class="welcome-banner">
+                        <h1>Welcome Back, Aarav! 👋</h1>
+                        <p>Here's what's happening with your academics today</p>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="stats-grid">
+                        <div class="stat-card blue">
+                            <div class="stat-icon">📅</div>
+                            <div class="stat-details">
+                                <h3>92.5%</h3>
+                                <p>Attendance</p>
+                            </div>
+                        </div>
+                        <div class="stat-card green">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-details">
+                                <h3>87.2%</h3>
+                                <p>Average Score</p>
+                            </div>
+                        </div>
+                        <div class="stat-card orange">
+                            <div class="stat-icon">📝</div>
+                            <div class="stat-details">
+                                <h3>5</h3>
+                                <p>Pending Tasks</p>
+                            </div>
+                        </div>
+                        <div class="stat-card purple">
+                            <div class="stat-icon">🏆</div>
+                            <div class="stat-details">
+                                <h3>3rd</h3>
+                                <p>Class Rank</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts & Analytics -->
+                    <div class="analytics-grid">
+                        <div class="chart-card">
+                            <h3>Academic Performance</h3>
+                            <canvas id="performanceChart" width="400" height="250"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Attendance Trend</h3>
+                            <canvas id="attendanceChart" width="400" height="250"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="activity-section">
+                        <div class="recent-assignments">
+                            <h3>Pending Assignments</h3>
+                            <div class="assignment-list">
+                                <div class="assignment-item urgent">
+                                    <div class="assignment-info">
+                                        <h4>Mathematics - Quadratic Equations</h4>
+                                        <p>Due: Tomorrow, 5:00 PM</p>
+                                    </div>
+                                    <span class="status-badge red">Urgent</span>
+                                </div>
+                                <div class="assignment-item">
+                                    <div class="assignment-info">
+                                        <h4>English - Essay Writing</h4>
+                                        <p>Due: 20th Feb, 2026</p>
+                                    </div>
+                                    <span class="status-badge yellow">Pending</span>
+                                </div>
+                                <div class="assignment-item">
+                                    <div class="assignment-info">
+                                        <h4>Science - Lab Report</h4>
+                                        <p>Due: 25th Feb, 2026</p>
+                                    </div>
+                                    <span class="status-badge yellow">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recent-notices">
+                            <h3>Latest Notices</h3>
+                            <div class="notice-list">
+                                <div class="notice-item">
+                                    <span class="notice-date">15 Feb</span>
+                                    <p>Sports Day scheduled for 25th March 2025</p>
+                                </div>
+                                <div class="notice-item">
+                                    <span class="notice-date">14 Feb</span>
+                                    <p>Unit Test 3 will commence from 1st March</p>
+                                </div>
+                                <div class="notice-item">
+                                    <span class="notice-date">12 Feb</span>
+                                    <p>Parent-Teacher Meeting on 18th February</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section id="profile" class="content-section">
+                    <h2 class="section-title">Student Profile</h2>
+                    <div class="profile-container">
+                        <div class="profile-card">
+                            <div class="profile-header-section">
+                                <div class="profile-picture">AK</div>
+                                <div class="profile-details">
+                                    <h2>Aarav Kumar</h2>
+                                    <p class="student-id">Student ID: CPS2024X045</p>
+                                    <p class="admission-no">Admission No: 12345</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <label>Class & Section</label>
+                                <p>Class X - Section A</p>
+                            </div>
+                            <div class="info-box">
+                                <label>Roll Number</label>
+                                <p>15</p>
+                            </div>
+                            <div class="info-box">
+                                <label>Date of Birth</label>
+                                <p>15 January 2011</p>
+                            </div>
+                            <div class="info-box">
+                                <label>Blood Group</label>
+                                <p>B+</p>
+                            </div>
+                            <div class="info-box">
+                                <label>Father's Name</label>
+                                <p>Mr. Rajesh Kumar</p>
+                            </div>
+                            <div class="info-box">
+                                <label>Mother's Name</label>
+                                <p>Mrs. Priya Kumar</p>
+                            </div>
+                            <div class="info-box">
+                                <label>Contact Number</label>
+                                <p>+91-9876543210</p>
+                            </div>
+                            <div class="info-box">
+                                <label>Email Address</label>
+                                <p>aarav.kumar@student.cps.edu.in</p>
+                            </div>
+                            <div class="info-box full-width">
+                                <label>Address</label>
+                                <p>123, Gandhi Nagar, Azamgarh, Uttar Pradesh - 276128</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Attendance Section -->
+                <section id="attendance" class="content-section">
+                    <h2 class="section-title">Attendance Record</h2>
+                    <div class="attendance-overview">
+                        <div class="attendance-stat">
+                            <h3>Total Days</h3>
+                            <p class="big-number">200</p>
+                        </div>
+                        <div class="attendance-stat">
+                            <h3>Present</h3>
+                            <p class="big-number green-text">185</p>
+                        </div>
+                        <div class="attendance-stat">
+                            <h3>Absent</h3>
+                            <p class="big-number red-text">15</p>
+                        </div>
+                        <div class="attendance-stat">
+                            <h3>Percentage</h3>
+                            <p class="big-number blue-text">92.5%</p>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h3>Monthly Attendance</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Working Days</th>
+                                    <th>Present</th>
+                                    <th>Absent</th>
+                                    <th>Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>February 2026</td>
+                                    <td>15</td>
+                                    <td>14</td>
+                                    <td>1</td>
+                                    <td><span class="badge-success">93.3%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>January 2026</td>
+                                    <td>22</td>
+                                    <td>21</td>
+                                    <td>1</td>
+                                    <td><span class="badge-success">95.5%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>December 2025</td>
+                                    <td>20</td>
+                                    <td>19</td>
+                                    <td>1</td>
+                                    <td><span class="badge-success">95.0%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>November 2025</td>
+                                    <td>23</td>
+                                    <td>20</td>
+                                    <td>3</td>
+                                    <td><span class="badge-warning">87.0%</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Fee Status Section -->
+                <section id="fees" class="content-section">
+                    <h2 class="section-title">Fee Payment Status</h2>
+                    <div class="fee-summary">
+                        <div class="fee-card total">
+                            <h4>Total Annual Fee</h4>
+                            <p class="amount">₹45,000</p>
+                        </div>
+                        <div class="fee-card paid">
+                            <h4>Amount Paid</h4>
+                            <p class="amount">₹30,000</p>
+                        </div>
+                        <div class="fee-card pending">
+                            <h4>Amount Pending</h4>
+                            <p class="amount">₹15,000</p>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h3>Payment History</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Receipt No.</th>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#RCP2026001</td>
+                                    <td>05 Jan 2026</td>
+                                    <td>Quarter 3 Fee</td>
+                                    <td>₹15,000</td>
+                                    <td><span class="badge-success">Paid</span></td>
+                                    <td><button class="btn-sm">Download</button></td>
+                                </tr>
+                                <tr>
+                                    <td>#RCP2025042</td>
+                                    <td>05 Oct 2025</td>
+                                    <td>Quarter 2 Fee</td>
+                                    <td>₹15,000</td>
+                                    <td><span class="badge-success">Paid</span></td>
+                                    <td><button class="btn-sm">Download</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Pending</td>
+                                    <td>Due: 05 Apr 2026</td>
+                                    <td>Quarter 4 Fee</td>
+                                    <td>₹15,000</td>
+                                    <td><span class="badge-danger">Pending</span></td>
+                                    <td><button class="btn-sm primary">Pay Now</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section id="results" class="content-section">
+                    <h2 class="section-title">Examination Results</h2>
+                    
+                    <div class="results-tabs">
+                        <button class="tab-btn active" onclick="showResultTab('unit2')">Unit Test 2</button>
+                        <button class="tab-btn" onclick="showResultTab('unit1')">Unit Test 1</button>
+                        <button class="tab-btn" onclick="showResultTab('halfyearly')">Half Yearly</button>
+                    </div>
+
+                    <div id="unit2" class="result-tab active">
+                        <div class="result-summary">
+                            <div class="summary-card">
+                                <h4>Total Marks</h4>
+                                <p>500</p>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Marks Obtained</h4>
+                                <p>436</p>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Percentage</h4>
+                                <p>87.2%</p>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Grade</h4>
+                                <p>A1</p>
+                            </div>
+                        </div>
+
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Max Marks</th>
+                                        <th>Marks Obtained</th>
+                                        <th>Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mathematics</td>
+                                        <td>100</td>
+                                        <td>92</td>
+                                        <td><span class="grade-badge a1">A1</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Science</td>
+                                        <td>100</td>
+                                        <td>88</td>
+                                        <td><span class="grade-badge a1">A1</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>English</td>
+                                        <td>100</td>
+                                        <td>85</td>
+                                        <td><span class="grade-badge a2">A2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hindi</td>
+                                        <td>100</td>
+                                        <td>86</td>
+                                        <td><span class="grade-badge a2">A2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Social Science</td>
+                                        <td>100</td>
+                                        <td>85</td>
+                                        <td><span class="grade-badge a2">A2</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Assignments Section -->
+                <section id="assignments" class="content-section">
+                    <h2 class="section-title">Assignments & Homework</h2>
+                    
+                    <div class="assignments-container">
+                        <div class="assignment-card pending-assignment">
+                            <div class="assignment-header">
+                                <h4>Mathematics - Quadratic Equations</h4>
+                                <span class="priority-badge high">High Priority</span>
+                            </div>
+                            <p class="assignment-desc">Solve questions 1-15 from Exercise 4.3. Show all working steps.</p>
+                            <div class="assignment-meta">
+                                <span>📅 Due: 17 Feb 2026</span>
+                                <span>👨‍🏫 Mr. Anil Verma</span>
+                            </div>
+                            <div class="assignment-actions">
+                                <button class="btn-action">📄 View Details</button>
+                                <button class="btn-action primary">📤 Submit</button>
+                            </div>
+                        </div>
+
+                        <div class="assignment-card pending-assignment">
+                            <div class="assignment-header">
+                                <h4>English - Essay Writing</h4>
+                                <span class="priority-badge medium">Medium</span>
+                            </div>
+                            <p class="assignment-desc">Write an essay on "Impact of Technology on Education" (500 words)</p>
+                            <div class="assignment-meta">
+                                <span>📅 Due: 20 Feb 2026</span>
+                                <span>👩‍🏫 Mrs. Kavita Singh</span>
+                            </div>
+                            <div class="assignment-actions">
+                                <button class="btn-action">📄 View Details</button>
+                                <button class="btn-action primary">📤 Submit</button>
+                            </div>
+                        </div>
+
+                        <div class="assignment-card submitted-assignment">
+                            <div class="assignment-header">
+                                <h4>Science - Periodic Table</h4>
+                                <span class="status-badge green">Submitted</span>
+                            </div>
+                            <p class="assignment-desc">Learn and write first 20 elements with symbols and atomic numbers</p>
+                            <div class="assignment-meta">
+                                <span>📅 Submitted: 14 Feb 2026</span>
+                                <span>⭐ Grade: A+</span>
+                            </div>
+                            <div class="assignment-actions">
+                                <button class="btn-action">📄 View Feedback</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Study Materials Section -->
+                <section id="materials" class="content-section">
+                    <h2 class="section-title">Study Materials</h2>
+                    
+                    <div class="materials-grid">
+                        <div class="material-category">
+                            <h3>📐 Mathematics</h3>
+                            <div class="material-list">
+                                <div class="material-item">
+                                    <span class="file-icon">📄</span>
+                                    <div class="file-info">
+                                        <h4>Quadratic Equations Notes</h4>
+                                        <p>PDF • 2.3 MB</p>
+                                    </div>
+                                    <button class="download-btn">⬇️</button>
+                                </div>
+                                <div class="material-item">
+                                    <span class="file-icon">📄</span>
+                                    <div class="file-info">
+                                        <h4>Sample Papers Set 1</h4>
+                                        <p>PDF • 1.8 MB</p>
+                                    </div>
+                                    <button class="download-btn">⬇️</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="material-category">
+                            <h3>🔬 Science</h3>
+                            <div class="material-list">
+                                <div class="material-item">
+                                    <span class="file-icon">📄</span>
+                                    <div class="file-info">
+                                        <h4>Chemical Reactions Chapter</h4>
+                                        <p>PDF • 3.1 MB</p>
+                                    </div>
+                                    <button class="download-btn">⬇️</button>
+                                </div>
+                                <div class="material-item">
+                                    <span class="file-icon">🎥</span>
+                                    <div class="file-info">
+                                        <h4>Lab Safety Video</h4>
+                                        <p>MP4 • 45 MB</p>
+                                    </div>
+                                    <button class="download-btn">⬇️</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="material-category">
+                            <h3>📖 English</h3>
+                            <div class="material-list">
+                                <div class="material-item">
+                                    <span class="file-icon">📄</span>
+                                    <div class="file-info">
+                                        <h4>Grammar Handbook</h4>
+                                        <p>PDF • 4.2 MB</p>
+                                    </div>
+                                    <button class="download-btn">⬇️</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Timetable Section -->
+                <section id="timetable" class="content-section">
+                    <h2 class="section-title">Class Timetable</h2>
+                    
+                    <div class="timetable-container">
+                        <table class="timetable">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Monday</th>
+                                    <th>Tuesday</th>
+                                    <th>Wednesday</th>
+                                    <th>Thursday</th>
+                                    <th>Friday</th>
+                                    <th>Saturday</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="time-slot">8:00 - 8:45</td>
+                                    <td class="subject math">Mathematics</td>
+                                    <td class="subject english">English</td>
+                                    <td class="subject science">Science</td>
+                                    <td class="subject math">Mathematics</td>
+                                    <td class="subject hindi">Hindi</td>
+                                    <td class="subject ss">Social Sci</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-slot">8:45 - 9:30</td>
+                                    <td class="subject science">Science</td>
+                                    <td class="subject math">Mathematics</td>
+                                    <td class="subject english">English</td>
+                                    <td class="subject hindi">Hindi</td>
+                                    <td class="subject science">Science</td>
+                                    <td class="subject math">Mathematics</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-slot">9:30 - 10:15</td>
+                                    <td class="subject english">English</td>
+                                    <td class="subject ss">Social Sci</td>
+                                    <td class="subject math">Mathematics</td>
+                                    <td class="subject science">Science</td>
+                                    <td class="subject ss">Social Sci</td>
+                                    <td class="subject english">English</td>
+                                </tr>
+                                <tr class="break-row">
+                                    <td class="time-slot">10:15 - 10:30</td>
+                                    <td colspan="6" class="break">Short Break</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-slot">10:30 - 11:15</td>
+                                    <td class="subject hindi">Hindi</td>
+                                    <td class="subject science">Science</td>
+                                    <td class="subject ss">Social Sci</td>
+                                    <td class="subject english">English</td>
+                                    <td class="subject math">Mathematics</td>
+                                    <td class="subject hindi">Hindi</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-slot">11:15 - 12:00</td>
+                                    <td class="subject ss">Social Sci</td>
+                                    <td class="subject hindi">Hindi</td>
+                                    <td class="subject hindi">Hindi</td>
+                                    <td class="subject ss">Social Sci</td>
+                                    <td class="subject english">English</td>
+                                    <td class="subject extra">Activity</td>
+                                </tr>
+                                <tr class="break-row">
+                                    <td class="time-slot">12:00 - 12:30</td>
+                                    <td colspan="6" class="break">Lunch Break</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-slot">12:30 - 1:15</td>
+                                    <td class="subject comp">Computer</td>
+                                    <td class="subject extra">PE</td>
+                                    <td class="subject comp">Computer</td>
+                                    <td class="subject extra">Art</td>
+                                    <td class="subject extra">Music</td>
+                                    <td class="subject extra">Sports</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Online Tests Section -->
+                <section id="tests" class="content-section">
+                    <h2 class="section-title">Online Tests</h2>
+                    
+                    <div class="tests-container">
+                        <div class="test-card available">
+                            <div class="test-header">
+                                <h4>Mathematics Unit Test 3</h4>
+                                <span class="test-badge live">Live Now</span>
+                            </div>
+                            <div class="test-details">
+                                <p><strong>Duration:</strong> 60 minutes</p>
+                                <p><strong>Total Marks:</strong> 50</p>
+                                <p><strong>Available Until:</strong> 18 Feb 2026, 5:00 PM</p>
+                            </div>
+                            <button class="btn-test">Start Test</button>
+                        </div>
+
+                        <div class="test-card upcoming">
+                            <div class="test-header">
+                                <h4>Science Practice Test</h4>
+                                <span class="test-badge upcoming">Upcoming</span>
+                            </div>
+                            <div class="test-details">
+                                <p><strong>Duration:</strong> 45 minutes</p>
+                                <p><strong>Total Marks:</strong> 40</p>
+                                <p><strong>Starts On:</strong> 22 Feb 2026, 10:00 AM</p>
+                            </div>
+                            <button class="btn-test" disabled>Not Started</button>
+                        </div>
+
+                        <div class="test-card completed">
+                            <div class="test-header">
+                                <h4>English Grammar Test</h4>
+                                <span class="test-badge completed">Completed</span>
+                            </div>
+                            <div class="test-details">
+                                <p><strong>Score:</strong> 38/40 (95%)</p>
+                                <p><strong>Completed On:</strong> 10 Feb 2026</p>
+                                <p><strong>Grade:</strong> A+</p>
+                            </div>
+                            <button class="btn-test">View Results</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Notices Section -->
+                <section id="notices" class="content-section">
+                    <h2 class="section-title">Notices & Announcements</h2>
+                    
+                    <div class="notices-list">
+                        <div class="notice-card important">
+                            <div class="notice-badge">Important</div>
+                            <h4>Unit Test 3 Schedule Released</h4>
+                            <p>Unit Test 3 will be conducted from 1st March to 8th March 2026. Please check the detailed schedule and prepare accordingly.</p>
+                            <div class="notice-footer">
+                                <span>📅 Posted: 15 Feb 2026</span>
+                                <button class="btn-sm">Read More</button>
+                            </div>
+                        </div>
+
+                        <div class="notice-card">
+                            <h4>Annual Sports Day - 25th March 2025</h4>
+                            <p>All students are required to participate in the Annual Sports Day. Registration for individual and team events is now open.</p>
+                            <div class="notice-footer">
+                                <span>📅 Posted: 14 Feb 2026</span>
+                                <button class="btn-sm">Read More</button>
+                            </div>
+                        </div>
+
+                        <div class="notice-card">
+                            <h4>Parent-Teacher Meeting</h4>
+                            <p>PTM scheduled for 18th February 2026 from 9:00 AM to 2:00 PM. Parents are requested to meet subject teachers.</p>
+                            <div class="notice-footer">
+                                <span>📅 Posted: 12 Feb 2026</span>
+                                <button class="btn-sm">Read More</button>
+                            </div>
+                        </div>
+
+                        <div class="notice-card">
+                            <h4>Science Exhibition Registration</h4>
+                            <p>Registration for Inter-School Science Exhibition is open. Submit your project proposals by 28th February.</p>
+                            <div class="notice-footer">
+                                <span>📅 Posted: 10 Feb 2026</span>
+                                <button class="btn-sm">Read More</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ID Card Section -->
+                <section id="idcard" class="content-section">
+                    <h2 class="section-title">Student ID Card</h2>
+                    
+                    <div class="idcard-container">
+                        <div class="id-card">
+                            <div class="id-card-header">
+                                <div class="school-logo">CPS</div>
+                                <div class="school-name">
+                                    <h3>CENTRAL PUBLIC SCHOOL</h3>
+                                    <p>Azamgarh, Uttar Pradesh</p>
+                                </div>
+                            </div>
+                            
+                            <div class="id-card-body">
+                                <div class="id-photo">
+                                    <div class="photo-placeholder">AK</div>
+                                </div>
+                                <div class="id-details">
+                                    <div class="id-field">
+                                        <label>Name:</label>
+                                        <p>Aarav Kumar</p>
+                                    </div>
+                                    <div class="id-field">
+                                        <label>Student ID:</label>
+                                        <p>CPS2024X045</p>
+                                    </div>
+                                    <div class="id-field">
+                                        <label>Class:</label>
+                                        <p>X - A</p>
+                                    </div>
+                                    <div class="id-field">
+                                        <label>Roll No:</label>
+                                        <p>15</p>
+                                    </div>
+                                    <div class="id-field">
+                                        <label>Blood Group:</label>
+                                        <p>B+</p>
+                                    </div>
+                                    <div class="id-field">
+                                        <label>Valid Till:</label>
+                                        <p>31 March 2026</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="id-card-footer">
+                                <div class="signature">
+                                    <p>Principal's Signature</p>
+                                </div>
+                                <div class="barcode">| | || ||| || | |</div>
+                            </div>
+                        </div>
+                        
+                        <div class="id-actions">
+                            <button class="btn-action primary">📥 Download ID Card</button>
+                            <button class="btn-action">🖨️ Print ID Card</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="portal-script.js"></script>
+</body>
+</html>

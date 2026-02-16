@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Central Public School</title>
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+    <!-- Admin Login Page -->
+    <div id="adminLoginPage" class="admin-login-wrapper">
+        <div class="admin-login-container">
+            <div class="admin-login-card">
+                <div class="admin-login-header">
+                    <div class="admin-emblem">
+                        <div class="emblem-bg">🔐</div>
+                    </div>
+                    <h1>Admin Control Panel</h1>
+                    <p>Central Public School Management System</p>
+                </div>
+                
+                <form class="admin-login-form" onsubmit="adminLogin(event)">
+                    <div class="input-wrapper">
+                        <label>Admin ID</label>
+                        <input type="text" id="adminId" placeholder="Enter admin ID" required>
+                    </div>
+                    
+                    <div class="input-wrapper">
+                        <label>Password</label>
+                        <input type="password" id="adminPassword" placeholder="Enter password" required>
+                    </div>
+                    
+                    <div class="login-options">
+                        <label class="remember-check">
+                            <input type="checkbox"> Keep me logged in
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="admin-login-btn">Access Dashboard</button>
+                </form>
+                
+                <div class="login-security">
+                    <p>🔒 Secure SSL Connection • Protected Access</p>
+                    <a href="index.html" class="return-link">← Return to Main Site</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="admin-dashboard" style="display: none;">
+        <!-- Sidebar Navigation -->
+        <nav class="admin-sidebar" id="adminSidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">⚙️</div>
+                <div class="brand-text">
+                    <h2>Admin Panel</h2>
+                    <span>CPS Management</span>
+                </div>
+            </div>
+            
+            <div class="admin-menu">
+                <a href="#" class="menu-link active" onclick="showAdminSection('dashboard')">
+                    <span class="link-icon">📊</span>
+                    <span class="link-label">Dashboard</span>
+                </a>
+                <a href="#" class="menu-link" onclick="showAdminSection('students')">
+                    <span class="link-icon">👥</span>
+                    <span class="link-label">Students</span>
+                </a>
+                <a href="#" class="menu-link" onclick="showAdminSection('faculty')">
+                    <span class="link-icon">👨‍🏫</span>
+                    <span class="link-label">Faculty</span>
+                </a>
+                <a href="#" class="menu-link" onclick="showAdminSection('attendance')">
+                    <span class="link-icon">✅</span>
+                    <span class="link-label">Attendance</span>
+                </a>
+                <a href="#" class="menu-link" onclick="showAdminSection('fees')">
+                    <span class="link-icon">💵</span>
+                    <span class="link-label">Fee Management</span>
+                </a>
+                <a href="#" class="menu-link" onclick="showAdminSection('results')">
+                    <span class="link-icon">📈</span>
+                    <span class="link-label">Results</span>
+                </a>
+                <a href="#" class="menu-link" onclick="showAdminSection('materials')">
+                    <span class="link-icon">📚</span>
+                    <span class="link-label">Study Materials</span>
+                </a>
+                <a href="#" class="menu-link" onclick="showAdminSection('notices')">
+                    <span class="link-icon">📢</span>
+                    <span class="link-label">Notices</span>
+                </a>
+                <a href="#" class="menu-link" onclick="showAdminSection('timetable')">
+                    <span class="link-icon">📅</span>
+                    <span class="link-label">Timetable</span>
+                </a>
+                <a href="#" class="menu-link" onclick="showAdminSection('reports')">
+                    <span class="link-icon">📄</span>
+                    <span class="link-label">Reports</span>
+                </a>
+                <a href="#" class="menu-link" onclick="showAdminSection('settings')">
+                    <span class="link-icon">⚙️</span>
+                    <span class="link-label">Settings</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div class="admin-main">
+            <!-- Top Header Bar -->
+            <header class="admin-header">
+                <button class="menu-toggle" onclick="toggleAdminSidebar()">☰</button>
+                
+                <div class="header-search">
+                    <input type="text" placeholder="Search students, faculty, records...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="action-item">
+                        <span class="action-icon">🔔</span>
+                        <span class="notification-count">5</span>
+                    </div>
+                    <div class="action-item">
+                        <span class="action-icon">✉️</span>
+                        <span class="notification-count">12</span>
+                    </div>
+                    <div class="admin-profile">
+                        <div class="admin-avatar">DR</div>
+                        <div class="admin-info">
+                            <span class="admin-name">Dr. Rajesh Kumar</span>
+                            <span class="admin-role">Principal</span>
+                        </div>
+                        <button class="admin-logout" onclick="adminLogout()">Logout</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content Sections -->
+            <main class="admin-content">
+                <!-- Dashboard Overview -->
+                <section id="dashboard" class="admin-section active">
+                    <div class="section-head">
+                        <h1>Dashboard Overview</h1>
+                        <p>Welcome back, Dr. Rajesh Kumar</p>
+                    </div>
+
+                    <!-- Key Metrics -->
+                    <div class="metrics-row">
+                        <div class="metric-box primary">
+                            <div class="metric-icon">👥</div>
+                            <div class="metric-data">
+                                <h3>2,048</h3>
+                                <p>Total Students</p>
+                                <span class="metric-change positive">+12% from last year</span>
+                            </div>
+                        </div>
+                        <div class="metric-box success">
+                            <div class="metric-icon">👨‍🏫</div>
+                            <div class="metric-data">
+                                <h3>52</h3>
+                                <p>Faculty Members</p>
+                                <span class="metric-change positive">+4 new this month</span>
+                            </div>
+                        </div>
+                        <div class="metric-box warning">
+                            <div class="metric-icon">💰</div>
+                            <div class="metric-data">
+                                <h3>₹12.5L</h3>
+                                <p>Pending Fees</p>
+                                <span class="metric-change negative">348 students</span>
+                            </div>
+                        </div>
+                        <div class="metric-box info">
+                            <div class="metric-icon">📊</div>
+                            <div class="metric-data">
+                                <h3>92.5%</h3>
+                                <p>Avg Attendance</p>
+                                <span class="metric-change positive">+2.3% this month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts and Analytics -->
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card wide">
+                            <div class="card-header">
+                                <h3>Student Enrollment Trends</h3>
+                                <select class="filter-select">
+                                    <option>Last 6 Months</option>
+                                    <option>Last Year</option>
+                                    <option>Last 3 Years</option>
+                                </select>
+                            </div>
+                            <canvas id="enrollmentChart" height="80"></canvas>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3>Class-wise Distribution</h3>
+                            </div>
+                            <canvas id="distributionChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions & Recent Activity -->
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3>Quick Actions</h3>
+                            </div>
+                            <div class="quick-actions">
+                                <button class="action-btn primary">➕ Add New Student</button>
+                                <button class="action-btn success">📝 Post Notice</button>
+                                <button class="action-btn info">📤 Upload Results</button>
+                                <button class="action-btn warning">💳 Generate Fee Reports</button>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3>Recent Activities</h3>
+                            </div>
+                            <div class="activity-feed">
+                                <div class="activity-item">
+                                    <span class="activity-time">2 min ago</span>
+                                    <p>New admission: Rahul Sharma (Class VI)</p>
+                                </div>
+                                <div class="activity-item">
+                                    <span class="activity-time">15 min ago</span>
+                                    <p>Fee payment received: ₹15,000</p>
+                                </div>
+                                <div class="activity-item">
+                                    <span class="activity-time">1 hour ago</span>
+                                    <p>Notice published: Sports Day Schedule</p>
+                                </div>
+                                <div class="activity-item">
+                                    <span class="activity-time">2 hours ago</span>
+                                    <p>Class X results uploaded</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Students Management -->
+                <section id="students" class="admin-section">
+                    <div class="section-head">
+                        <h1>Student Management</h1>
+                        <button class="btn-primary" onclick="showModal('addStudent')">➕ Add New Student</button>
+                    </div>
+
+                    <div class="filters-bar">
+                        <select class="filter-input">
+                            <option>All Classes</option>
+                            <option>Nursery</option>
+                            <option>LKG - UKG</option>
+                            <option>Class I - V</option>
+                            <option>Class VI - VIII</option>
+                            <option>Class IX - X</option>
+                            <option>Class XI - XII</option>
+                        </select>
+                        <select class="filter-input">
+                            <option>All Sections</option>
+                            <option>Section A</option>
+                            <option>Section B</option>
+                            <option>Section C</option>
+                        </select>
+                        <input type="text" class="filter-input" placeholder="Search by name, ID...">
+                        <button class="btn-secondary">Search</button>
+                    </div>
+
+                    <div class="data-card">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Student ID</th>
+                                    <th>Name</th>
+                                    <th>Class</th>
+                                    <th>Section</th>
+                                    <th>Roll No</th>
+                                    <th>Contact</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>CPS2024X045</td>
+                                    <td>Aarav Kumar</td>
+                                    <td>X</td>
+                                    <td>A</td>
+                                    <td>15</td>
+                                    <td>9876543210</td>
+                                    <td>
+                                        <button class="table-btn edit">✏️</button>
+                                        <button class="table-btn view">👁️</button>
+                                        <button class="table-btn delete">🗑️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>CPS2024IX032</td>
+                                    <td>Priya Singh</td>
+                                    <td>IX</td>
+                                    <td>B</td>
+                                    <td>22</td>
+                                    <td>9876543211</td>
+                                    <td>
+                                        <button class="table-btn edit">✏️</button>
+                                        <button class="table-btn view">👁️</button>
+                                        <button class="table-btn delete">🗑️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>CPS2024VIII018</td>
+                                    <td>Rohan Gupta</td>
+                                    <td>VIII</td>
+                                    <td>A</td>
+                                    <td>08</td>
+                                    <td>9876543212</td>
+                                    <td>
+                                        <button class="table-btn edit">✏️</button>
+                                        <button class="table-btn view">👁️</button>
+                                        <button class="table-btn delete">🗑️</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <button class="page-btn">Previous</button>
+                            <span class="page-info">Page 1 of 45</span>
+                            <button class="page-btn">Next</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Faculty Management -->
+                <section id="faculty" class="admin-section">
+                    <div class="section-head">
+                        <h1>Faculty Management</h1>
+                        <button class="btn-primary" onclick="showModal('addFaculty')">➕ Add Faculty Member</button>
+                    </div>
+
+                    <div class="data-card">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Faculty ID</th>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>Department</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FAC001</td>
+                                    <td>Mr. Anil Verma</td>
+                                    <td>HOD Science</td>
+                                    <td>Science</td>
+                                    <td>9876501001</td>
+                                    <td>anil.verma@cps.edu.in</td>
+                                    <td>
+                                        <button class="table-btn edit">✏️</button>
+                                        <button class="table-btn view">👁️</button>
+                                        <button class="table-btn delete">🗑️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>FAC002</td>
+                                    <td>Mrs. Kavita Singh</td>
+                                    <td>HOD Mathematics</td>
+                                    <td>Mathematics</td>
+                                    <td>9876501002</td>
+                                    <td>kavita.singh@cps.edu.in</td>
+                                    <td>
+                                        <button class="table-btn edit">✏️</button>
+                                        <button class="table-btn view">👁️</button>
+                                        <button class="table-btn delete">🗑️</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Attendance Management -->
+                <section id="attendance" class="admin-section">
+                    <div class="section-head">
+                        <h1>Attendance Management</h1>
+                        <button class="btn-primary">📝 Mark Attendance</button>
+                    </div>
+
+                    <div class="attendance-controls">
+                        <div class="control-group">
+                            <label>Select Class</label>
+                            <select class="control-select">
+                                <option>Class X - A</option>
+                                <option>Class X - B</option>
+                                <option>Class IX - A</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Select Date</label>
+                            <input type="date" class="control-input" value="2026-02-16">
+                        </div>
+                        <button class="btn-secondary">Load Students</button>
+                    </div>
+
+                    <div class="data-card">
+                        <div class="attendance-summary">
+                            <div class="summary-item">
+                                <h4>Total Students</h4>
+                                <p class="big-text">45</p>
+                            </div>
+                            <div class="summary-item">
+                                <h4>Present</h4>
+                                <p class="big-text text-success">42</p>
+                            </div>
+                            <div class="summary-item">
+                                <h4>Absent</h4>
+                                <p class="big-text text-danger">3</p>
+                            </div>
+                            <div class="summary-item">
+                                <h4>Percentage</h4>
+                                <p class="big-text text-primary">93.3%</p>
+                            </div>
+                        </div>
+
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Roll No</th>
+                                    <th>Student Name</th>
+                                    <th>Status</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Aarav Kumar</td>
+                                    <td>
+                                        <label class="attendance-toggle">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </td>
+                                    <td><input type="text" class="remark-input" placeholder="Optional"></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Priya Sharma</td>
+                                    <td>
+                                        <label class="attendance-toggle">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </td>
+                                    <td><input type="text" class="remark-input" placeholder="Optional"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn-success">✅ Save Attendance</button>
+                    </div>
+                </section>
+
+                <!-- Fee Management -->
+                <section id="fees" class="admin-section">
+                    <div class="section-head">
+                        <h1>Fee Management</h1>
+                        <button class="btn-primary">💳 Collect Fee</button>
+                    </div>
+
+                    <div class="fee-overview">
+                        <div class="overview-card total">
+                            <h4>Total Receivable</h4>
+                            <p class="amount-text">₹92,16,000</p>
+                        </div>
+                        <div class="overview-card collected">
+                            <h4>Collected</h4>
+                            <p class="amount-text">₹79,66,000</p>
+                        </div>
+                        <div class="overview-card pending">
+                            <h4>Pending</h4>
+                            <p class="amount-text">₹12,50,000</p>
+                        </div>
+                    </div>
+
+                    <div class="data-card">
+                        <div class="card-header">
+                            <h3>Recent Transactions</h3>
+                            <button class="btn-secondary">Generate Report</button>
+                        </div>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Receipt No</th>
+                                    <th>Date</th>
+                                    <th>Student Name</th>
+                                    <th>Class</th>
+                                    <th>Amount</th>
+                                    <th>Payment Mode</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#RCP2026001</td>
+                                    <td>16 Feb 2026</td>
+                                    <td>Aarav Kumar</td>
+                                    <td>X-A</td>
+                                    <td>₹15,000</td>
+                                    <td>Online</td>
+                                    <td><span class="status-pill success">Paid</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#RCP2026002</td>
+                                    <td>16 Feb 2026</td>
+                                    <td>Priya Singh</td>
+                                    <td>IX-B</td>
+                                    <td>₹15,000</td>
+                                    <td>Cash</td>
+                                    <td><span class="status-pill success">Paid</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Results Management -->
+                <section id="results" class="admin-section">
+                    <div class="section-head">
+                        <h1>Results Management</h1>
+                        <button class="btn-primary">📤 Upload Results</button>
+                    </div>
+
+                    <div class="upload-zone">
+                        <div class="upload-icon">📁</div>
+                        <h3>Upload Result File</h3>
+                        <p>Drag & drop Excel/CSV file or click to browse</p>
+                        <button class="browse-btn">Browse Files</button>
+                        <p class="upload-hint">Supported formats: .xlsx, .csv (Max 10MB)</p>
+                    </div>
+
+                    <div class="data-card">
+                        <div class="card-header">
+                            <h3>Published Results</h3>
+                        </div>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Exam Name</th>
+                                    <th>Class</th>
+                                    <th>Published Date</th>
+                                    <th>Total Students</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Unit Test 2</td>
+                                    <td>Class X</td>
+                                    <td>10 Feb 2026</td>
+                                    <td>150</td>
+                                    <td>
+                                        <button class="table-btn view">👁️</button>
+                                        <button class="table-btn edit">✏️</button>
+                                        <button class="table-btn download">⬇️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Half Yearly</td>
+                                    <td>Class IX</td>
+                                    <td>05 Jan 2026</td>
+                                    <td>165</td>
+                                    <td>
+                                        <button class="table-btn view">👁️</button>
+                                        <button class="table-btn edit">✏️</button>
+                                        <button class="table-btn download">⬇️</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Study Materials -->
+                <section id="materials" class="admin-section">
+                    <div class="section-head">
+                        <h1>Study Materials</h1>
+                        <button class="btn-primary">📤 Upload Material</button>
+                    </div>
+
+                    <div class="materials-grid">
+                        <div class="material-box">
+                            <div class="material-header">
+                                <h4>Mathematics</h4>
+                                <span class="file-count">24 Files</span>
+                            </div>
+                            <div class="material-files">
+                                <div class="file-row">
+                                    <span class="file-icon">📄</span>
+                                    <span class="file-name">Quadratic Equations.pdf</span>
+                                    <button class="file-action">🗑️</button>
+                                </div>
+                                <div class="file-row">
+                                    <span class="file-icon">📄</span>
+                                    <span class="file-name">Sample Papers.pdf</span>
+                                    <button class="file-action">🗑️</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="material-box">
+                            <div class="material-header">
+                                <h4>Science</h4>
+                                <span class="file-count">18 Files</span>
+                            </div>
+                            <div class="material-files">
+                                <div class="file-row">
+                                    <span class="file-icon">📄</span>
+                                    <span class="file-name">Chemical Reactions.pdf</span>
+                                    <button class="file-action">🗑️</button>
+                                </div>
+                                <div class="file-row">
+                                    <span class="file-icon">🎥</span>
+                                    <span class="file-name">Lab Safety.mp4</span>
+                                    <button class="file-action">🗑️</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Notices Management -->
+                <section id="notices" class="admin-section">
+                    <div class="section-head">
+                        <h1>Notices & Announcements</h1>
+                        <button class="btn-primary" onclick="showModal('createNotice')">➕ Create Notice</button>
+                    </div>
+
+                    <div class="data-card">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Posted Date</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Unit Test 3 Schedule</td>
+                                    <td>15 Feb 2026</td>
+                                    <td><span class="priority-tag high">High</span></td>
+                                    <td><span class="status-pill success">Active</span></td>
+                                    <td>
+                                        <button class="table-btn edit">✏️</button>
+                                        <button class="table-btn delete">🗑️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Sports Day Announcement</td>
+                                    <td>14 Feb 2026</td>
+                                    <td><span class="priority-tag medium">Medium</span></td>
+                                    <td><span class="status-pill success">Active</span></td>
+                                    <td>
+                                        <button class="table-btn edit">✏️</button>
+                                        <button class="table-btn delete">🗑️</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Timetable Management -->
+                <section id="timetable" class="admin-section">
+                    <div class="section-head">
+                        <h1>Timetable Management</h1>
+                        <button class="btn-primary">➕ Create Timetable</button>
+                    </div>
+
+                    <div class="timetable-controls">
+                        <select class="control-select">
+                            <option>Class X - A</option>
+                            <option>Class X - B</option>
+                            <option>Class IX - A</option>
+                        </select>
+                        <button class="btn-secondary">Load Timetable</button>
+                        <button class="btn-success">Save Changes</button>
+                    </div>
+
+                    <div class="data-card">
+                        <p class="info-text">Select a class to view and edit timetable</p>
+                    </div>
+                </section>
+
+                <!-- Reports Section -->
+                <section id="reports" class="admin-section">
+                    <div class="section-head">
+                        <h1>Reports & Analytics</h1>
+                    </div>
+
+                    <div class="reports-grid">
+                        <div class="report-card">
+                            <h4>📊 Attendance Report</h4>
+                            <p>Generate class-wise or student-wise attendance reports</p>
+                            <button class="report-btn">Generate</button>
+                        </div>
+                        <div class="report-card">
+                            <h4>💰 Fee Collection Report</h4>
+                            <p>Monthly, quarterly, or annual fee collection summary</p>
+                            <button class="report-btn">Generate</button>
+                        </div>
+                        <div class="report-card">
+                            <h4>📈 Academic Performance</h4>
+                            <p>Student performance analysis and class statistics</p>
+                            <button class="report-btn">Generate</button>
+                        </div>
+                        <div class="report-card">
+                            <h4>👥 Student Enrollment</h4>
+                            <p>Admission trends and class-wise distribution</p>
+                            <button class="report-btn">Generate</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="admin-section">
+                    <div class="section-head">
+                        <h1>System Settings</h1>
+                    </div>
+
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <h4>🏫 School Information</h4>
+                            <div class="setting-item">
+                                <label>School Name</label>
+                                <input type="text" value="Central Public School" class="setting-input">
+                            </div>
+                            <div class="setting-item">
+                                <label>Address</label>
+                                <textarea class="setting-textarea">Near Kanshiram Awas Colony, Jaffarpur, Azamgarh, UP 276128</textarea>
+                            </div>
+                            <div class="setting-item">
+                                <label>Contact Number</label>
+                                <input type="text" value="+91-XXXXXXXXXX" class="setting-input">
+                            </div>
+                            <button class="btn-success">Save Changes</button>
+                        </div>
+
+                        <div class="settings-card">
+                            <h4>📧 Notification Settings</h4>
+                            <div class="setting-toggle">
+                                <span>Email Notifications</span>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-toggle">
+                                <span>SMS Notifications</span>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-toggle">
+                                <span>WhatsApp Notifications</span>
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h4>🔐 Security Settings</h4>
+                            <div class="setting-item">
+                                <label>Change Password</label>
+                                <input type="password" placeholder="New password" class="setting-input">
+                            </div>
+                            <div class="setting-item">
+                                <label>Confirm Password</label>
+                                <input type="password" placeholder="Confirm password" class="setting-input">
+                            </div>
+                            <button class="btn-primary">Update Password</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
